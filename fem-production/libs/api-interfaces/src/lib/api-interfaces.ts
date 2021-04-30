@@ -2,11 +2,7 @@ export interface Message {
   message: string;
 }
 
-export interface BaseEntity {
-  id?: string;
-}
+export class Widget {
 
-export interface Widget extends BaseEntity {
-  title: string;
-  description: string;
+  constructor(public id: string | null, public title: string, public description: string) { }
 }
