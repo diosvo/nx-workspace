@@ -7,3 +7,11 @@ nx add @ngrx/store --defaults=true --interactive=false
 
 npm install -g nx
 npm install -g @nrwl/cli
+
+> core-data: communicate with a serve
+nx g lib core-data --parent-module=apps/dashboard/src/app/app.module.ts --routing --style=scss
+nx g lib core-state --parent-module=apps/dashboard/src/app/app.module.ts --routing --style=scss
+nx g lib material --parent-module=apps/dashboard/src/app/app.module.ts --routing --style=scss
+
+> Services
+nx g s services/widgets/widgets --project=core-data
