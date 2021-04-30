@@ -1,2 +1,9 @@
-npx create-nx-workspace@10.3.2 fem-production-angular --appName=dashboard --preset=angular-nest --npmS cope-fem --linter=tslint --style=scss --nx-cloud=false
+npx create-nx-workspace workspace fem-production-angular --appName=dashboard --preset=angular-nest --npmS cope-fem --linter=tslint --style=scss --nx-cloud=false
   
+yarn install
+
+nx add @angular/material --defaults=true --interactive=false 
+nx add @ngrx/store --defaults=true --interactive=false
+
+npm install -g nx
+npm install -g @nrwl/cli

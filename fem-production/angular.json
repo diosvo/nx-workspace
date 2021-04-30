@@ -1,6 +1,7 @@
 {
   "version": 1,
   "cli": {
+    "analytics": false,
     "defaultCollection": "@nrwl/angular"
   },
   "defaultProject": "dashboard",
@@ -74,7 +75,7 @@
               "apps/dashboard/src/favicon.ico",
               "apps/dashboard/src/assets"
             ],
-            "styles": ["apps/dashboard/src/styles.scss"],
+            "styles": ["./node_modules/@angular/material/prebuilt-themes/indigo-pink.css", "apps/dashboard/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
