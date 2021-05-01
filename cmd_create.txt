@@ -15,3 +15,8 @@ nx g lib material --parent-module=apps/dashboard/src/app/app.module.ts --routing
 
 > Services
 nx g s services/widgets/widgets --project=core-data
+nx g s services/items/items --project=core-data
+
+> Another Application
+ng g app client --linter=tslint --style=scss --routing=false
+--> run: nx run client:serve

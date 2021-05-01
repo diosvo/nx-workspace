@@ -2,17 +2,34 @@
     "widgets": [
         {
             "id": "1",
-            "title": "Remove Mock Widget 01",
+            "title": "Remote Widget 01",
             "description": "Pending..."
         },
         {
             "id": "2",
-            "title": "Remove Mock Widget 02",
+            "title": "Remote Widget 02",
             "description": "Pending..."
         },
         {
             "id": "3",
-            "title": "Remove Mock Widget 03",
+            "title": "Remote Widget 03",
+            "description": "Pending..."
+        }
+    ],
+    "items": [
+        {
+            "id": "1",
+            "title": "Remote Item 01",
+            "description": "Pending..."
+        },
+        {
+            "id": "2",
+            "title": "Remote Item 02",
+            "description": "Pending..."
+        },
+        {
+            "id": "3",
+            "title": "Remote Item 03",
             "description": "Pending..."
         }
     ]

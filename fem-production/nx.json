@@ -18,6 +18,8 @@
     "api-interfaces": { "tags": [] },
     "core-data": { "tags": [] },
     "core-state": { "tags": [] },
-    "material": { "tags": [] }
+    "material": { "tags": [] },
+    "client": { "tags": [] },
+    "client-e2e": { "tags": [], "implicitDependencies": ["client"] }
   }
 }
