@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Widget } from '@fem-production/api-interfaces';
+import { WidgetsService } from '@fem-production/core-data';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'fem-production-home',
@@ -7,13 +9,15 @@ import { Widget } from '@fem-production/api-interfaces';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
+  widgets$: Observable<Widget[]>;
 
-  widgets: Array<Widget> = [
-    { id: '1', title: 'Widget 01', description: 'Pending' },
-    { id: '2', title: 'Widget 02', description: 'Pending' },
-    { id: '3', title: 'Widget 03', description: 'Pending' }
-  ]
+  constructor(private widgetsService: WidgetsService) { }
 
-  constructor() { }
+  ngOnInit(): void {
+    this.loadWidgets();
+  }
 
+  loadWidgets(): void {
+    this.widgets$ = this.widgetsService.all();
+  }
 }

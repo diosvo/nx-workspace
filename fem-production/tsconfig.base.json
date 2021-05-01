@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@env/environment": ["apps/api/src/environments/environment.ts"],
       "@fem-production/api-interfaces": ["libs/api-interfaces/src/index.ts"],
       "@fem-production/core-data": ["libs/core-data/src/index.ts"],
       "@fem-production/core-state": ["libs/core-state/src/index.ts"],

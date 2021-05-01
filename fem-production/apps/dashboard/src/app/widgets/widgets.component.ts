@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Widget } from '@fem-production/api-interfaces';
-
-const mockWidgets: Array<Widget> = [
-  { id: '1', title: 'Widget 01', description: 'Pending' },
-  { id: '2', title: 'Widget 02', description: 'Pending' },
-  { id: '3', title: 'Widget 03', description: 'Pending' }
-]
+import { WidgetsService } from '@fem-production/core-data';
+import { Observable } from 'rxjs';
 
 const emptyWidget: Widget = {
   id: null,
@@ -19,56 +15,49 @@ const emptyWidget: Widget = {
   styleUrls: ['./widgets.component.scss']
 })
 export class WidgetsComponent implements OnInit {
-  widgets: Array<Widget>;
-  selectedWidgets: Widget;
+  widgets$: Observable<Widget[]>;
+  selectWidget: Widget;
 
-  constructor() {
-  }
-
+  constructor(private widgetsService: WidgetsService) { }
+  
   ngOnInit(): void {
+    this.load();
     this.reset();
   }
 
   reset(): void {
-    this.loadWidgets();
-    this.selectedWidgets = null;
+    this.load();
+    this.selectWidget = null;
   }
 
   resetForm(): void {
-    this.selectedWidgets = emptyWidget;
+    this.selectWidget = emptyWidget;
   }
 
-  selectWidget(widget: Widget): void {
-    this.selectedWidgets = widget;
+  select(widget: Widget): void {
+    this.selectWidget = widget;
   }
 
-  loadWidgets(): void {
-    this.widgets = mockWidgets;
+  load(): void {
+    this.widgets$ = this.widgetsService.all();
   }
 
-  saveWidget(widget: Widget): void {
-    widget.id ? this.updateWidget(widget) : this.createWidget(widget);
+  save(widget: Widget): void {
+    widget.id ? this.update(widget) : this.create(widget);
   }
 
-  createWidget(widget: Widget): void {
-    const newWidget = Object.assign({}, widget, { id: this.getRandomID() });
-    this.widgets = [...this.widgets, newWidget];
+  create(widget: Widget): void {
+    this.widgetsService.create(widget);
     this.resetForm();
   }
 
-  updateWidget(widget: Widget): void {
-    this.widgets = this.widgets.map(item => {
-      return widget.id === item.id ? widget : item;
-    });
+  update(widget: Widget): void {
+    this.widgetsService.update(widget);
     this.resetForm();
   }
 
-  deleteWidget(widget: Widget): void {
-    this.widgets = this.widgets.filter(item => widget.id !== item.id);
+  delete(widget: Widget): void {
+    this.widgetsService.delete(widget);
     this.resetForm();
-  }
-
-  private getRandomID() {
-    return Math.random().toString(36).substring(7);
   }
 }
