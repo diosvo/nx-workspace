@@ -1,6 +1,10 @@
+.spacer {
+    flex: 1 1 auto;
+}
+
 .container {
     position: absolute;
-    top     : 0;
+    top     : 4rem;
     bottom  : 0;
     left    : 0;
     right   : 0;
