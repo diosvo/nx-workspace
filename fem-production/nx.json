@@ -20,6 +20,7 @@
     "core-state": { "tags": [] },
     "material": { "tags": [] },
     "client": { "tags": [] },
-    "client-e2e": { "tags": [], "implicitDependencies": ["client"] }
+    "client-e2e": { "tags": [], "implicitDependencies": ["client"] },
+    "ui-toolbar": { "tags": [] }
   }
 }

@@ -20,3 +20,8 @@ nx g s services/items/items --project=core-data
 > Another Application
 ng g app client --linter=tslint --style=scss --routing=false
 --> run: nx run client:serve
+
+> Sharing components through a Lib
+nx g lib ui-toolbar --style=scss
+--> Create toolbar: multiple components will show below toolbar
+nx g c toolbar/toolbar --project=ui-toolbar --style=scss
