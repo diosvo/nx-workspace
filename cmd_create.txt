@@ -1,2 +1,27 @@
-npx create-nx-workspace@10.3.2 fem-production-angular --appName=dashboard --preset=angular-nest --npmS cope-fem --linter=tslint --style=scss --nx-cloud=false
+npx create-nx-workspace workspace fem-production-angular --appName=dashboard --preset=angular-nest --npmS cope-fem --linter=tslint --style=scss --nx-cloud=false
   
+yarn install
+
+nx add @angular/material --defaults=true --interactive=false 
+nx add @ngrx/store --defaults=true --interactive=false
+
+npm install -g nx
+npm install -g @nrwl/cli
+
+> core-data: communicate with a serve
+nx g lib core-data --parent-module=apps/dashboard/src/app/app.module.ts --routing --style=scss
+nx g lib core-state --parent-module=apps/dashboard/src/app/app.module.ts --routing --style=scss
+nx g lib material --parent-module=apps/dashboard/src/app/app.module.ts --routing --style=scss
+
+> Services
+nx g s services/widgets/widgets --project=core-data
+nx g s services/items/items --project=core-data
+
+> Another Application
+ng g app client --linter=tslint --style=scss --routing=false
+--> run: nx run client:serve
+
+> Sharing components through a Lib
+nx g lib ui-toolbar --style=scss
+--> Create toolbar: multiple components will show below toolbar
+nx g c toolbar/toolbar --project=ui-toolbar --style=scss

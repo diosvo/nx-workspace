@@ -15,7 +15,12 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@fem-production/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@env/environment": ["apps/api/src/environments/environment.ts"],
+      "@fem-production/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@fem-production/core-data": ["libs/core-data/src/index.ts"],
+      "@fem-production/core-state": ["libs/core-state/src/index.ts"],
+      "@fem-production/material": ["libs/material/src/index.ts"],
+      "@fem-production/ui-toolbar": ["libs/ui-toolbar/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

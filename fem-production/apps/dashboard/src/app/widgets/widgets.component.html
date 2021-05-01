@@ -1,0 +1,9 @@
+<div class="component-container">
+  <div class="list-component">
+    <widget-list [widgets]="widgets$ | async" (selected)="select($event)" (deleted)="delete($event)">
+    </widget-list>
+  </div>
+  <div class="details-component">
+    <widget-details [widget]="selectWidget" (saved)="save($event)" (cancelled)="resetForm()"></widget-details>
+  </div>
+</div>
