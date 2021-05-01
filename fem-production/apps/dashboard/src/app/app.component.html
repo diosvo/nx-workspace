@@ -1,31 +1,31 @@
 <mat-toolbar color="primary">
-    <button mat-icon-button>
-        <mat-icon>menu</mat-icon>
-    </button>
-    <span>Production</span>
-    <span class="spacer"></span>
-    <button mat-icon-button class="favorite-icon">
-        <mat-icon>favorite</mat-icon>
-    </button>
-    <button mat-icon-button>
-        <mat-icon>share</mat-icon>
-    </button>
+  <button mat-icon-button>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Production</span>
+  <span class="spacer"></span>
+  <button mat-icon-button class="favorite-icon">
+    <mat-icon>favorite</mat-icon>
+  </button>
+  <button mat-icon-button>
+    <mat-icon>share</mat-icon>
+  </button>
 </mat-toolbar>
 
 <mat-sidenav-container class="container">
 
-    <mat-sidenav opened mode="side">
-        <ng-container>
-            <mat-nav-list>
-                <mat-list-item *ngFor="let link of links" [routerLink]="link.path" routerLinkActive="active">
-                    <mat-icon matListIcon>{{ link.icon }}</mat-icon>
-                    {{ link.title }}
-                </mat-list-item>
-            </mat-nav-list>
-        </ng-container>
-    </mat-sidenav>
+  <mat-sidenav opened mode="side">
+    <ng-container>
+      <mat-nav-list>
+        <mat-list-item *ngFor="let link of links" [routerLink]="link.path" routerLinkActive="active">
+          <mat-icon matListIcon>{{ link.icon }}</mat-icon>
+          {{ link.title }}
+        </mat-list-item>
+      </mat-nav-list>
+    </ng-container>
+  </mat-sidenav>
 
-    <mat-sidenav-content class="content-container">
-        <router-outlet></router-outlet>
-    </mat-sidenav-content>
+  <mat-sidenav-content class="content-container">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
 </mat-sidenav-container>
