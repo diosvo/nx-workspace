@@ -7,8 +7,10 @@ import { Widget } from '@fem-production/api-interfaces';
   styleUrls: ['./widget-list.component.scss']
 })
 export class WidgetListComponent {
-  @Input() widgets: Array<Widget>;
+  @Input() widgets: Array<Widget>
   @Input() readonly = false;
   @Output() selected = new EventEmitter();
   @Output() deleted = new EventEmitter();
+
+  displayedColumns = ['id', 'title', 'description'];
 }
