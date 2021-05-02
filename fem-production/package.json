@@ -13,7 +13,7 @@
     "serve:api": "nx run api:serve",
     "serve:web": "ng serve --open",
     "serve:client": "nx run client:serve --port=1212",
-    "serve:all": "concurrently \"npm run serve:api\" \"npm run serve:web\" \"npm run serve:json\" \"npm run serve:client\" ",
+    "serve:all": "concurrently \"npm run serve:api\" \"npm run serve:web\" \"npm run serve:client\" ",
     "lint": "nx workspace-lint && ng lint",
     "e2e": "ng e2e",
     "affected:apps": "nx affected:apps",
