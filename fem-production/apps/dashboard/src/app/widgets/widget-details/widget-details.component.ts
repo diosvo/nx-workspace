@@ -27,7 +27,6 @@ export class WidgetDetailsComponent {
   }
 
   onClose() {
-    // this.createForm.reset();
     this.cancelled.emit();
   }
 }

@@ -1,12 +1,12 @@
 <mat-grid-list cols="2" rowHeight="2:1">
   <mat-grid-tile>
     <div class="list-component">
-      <widget-list [widgets]="widgets$ | async" (selected)="select($event)" (deleted)="delete($event)">
+      <widget-list [widgets]="allWidgets$ | async" (selected)="select($event)" (deleted)="delete($event)">
       </widget-list>
     </div>
   </mat-grid-tile>
 
   <mat-grid-tile>
-    <widget-details [widget]="selectWidget" (saved)="save($event)" (cancelled)="resetForm()"></widget-details>
+    <widget-details [widget]="selectedWidget$ | async" (saved)="save($event)" (cancelled)="reset()"></widget-details>
   </mat-grid-tile>
 </mat-grid-list>
