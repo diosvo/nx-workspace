@@ -1,6 +1,6 @@
 <mat-card>
   <h3>Select Widget!</h3>
-  <form [formGroup]="createForm" class="form" (ngSubmit)="onSubmit()">
+  <form [formGroup]="createForm" class="form" (ngSubmit)="saved.emit()">
     <mat-form-field class="full-width">
       <mat-label>Title *</mat-label>
       <input formControlName="title" matInput placeholder="Widget">
@@ -12,8 +12,8 @@
     </mat-form-field>
 
     <div>
-      <button mat-raised-button [disabled]="createForm.invalid" (click)="onSubmit()">Save</button>
-      <button mat-raised-button color="warn" (click)="onClose()">Close</button>
+      <button mat-raised-button [disabled]="createForm.invalid" (click)="saved.emit()">Save</button>
+      <button mat-raised-button color="warn" (click)="cancelled.emit()">Close</button>
     </div>
   </form>
 </mat-card>

@@ -1,10 +1,14 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Route } from '@angular/router';
+import { NgModule } from '@angular/core';
 
-export const coreStateRoutes: Route[] = [];
+import { CoreDataModule } from '@fem-production/core-data';
+import { WidgetsFacade } from './widgets/widgets.facade';
 
 @NgModule({
-  imports: [CommonModule, RouterModule],
+  imports: [
+    CommonModule,
+    CoreDataModule
+  ],
+  providers: [WidgetsFacade],
 })
-export class CoreStateModule {}
+export class CoreStateModule { }

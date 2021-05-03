@@ -20,13 +20,4 @@ export class WidgetDetailsComponent {
       description: ['', Validators.required]
     })
   }
-
-  onSubmit() {
-    this.widget = this.createForm.value;
-    this.saved.emit();
-  }
-
-  onClose() {
-    this.cancelled.emit();
-  }
 }
