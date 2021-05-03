@@ -1,0 +1,12 @@
+.list-component {
+  width: 100%;
+}
+
+widget-list,
+widget-details {
+  width  : 100%;
+}
+
+:host ::ng-deep .mat-grid-tile .mat-figure {
+  align-items: inherit;
+}

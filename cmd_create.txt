@@ -25,3 +25,12 @@ ng g app client --linter=tslint --style=scss --routing=false
 nx g lib ui-toolbar --style=scss
 --> Create toolbar: multiple components will show below toolbar
 nx g c toolbar/toolbar --project=ui-toolbar --style=scss
+
+> Nestjs w/ Swagger
+yarn add @nestjs/mapped-types
+
+> Create schematics
+nx g @nestjs/schematics:resource widgets --type rest --crud true --source-root apps/api/src
+
+> Nest & Swagger
+yarn add @nestjs/swagger swagger-ui-express

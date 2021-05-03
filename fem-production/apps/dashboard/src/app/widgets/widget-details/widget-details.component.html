@@ -1,1 +1,19 @@
-<p>widget-details works!</p>
+<mat-card>
+  <h3>Select Widget!</h3>
+  <form [formGroup]="createForm" class="form" (ngSubmit)="onSubmit()">
+    <mat-form-field class="full-width">
+      <mat-label>Title *</mat-label>
+      <input formControlName="title" matInput placeholder="Widget">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea formControlName="description" matInput placeholder="Pending..."></textarea>
+    </mat-form-field>
+
+    <div>
+      <button mat-raised-button [disabled]="createForm.invalid" (click)="onSubmit()">Save</button>
+      <button mat-raised-button color="warn" (click)="onClose()">Close</button>
+    </div>
+  </form>
+</mat-card>
