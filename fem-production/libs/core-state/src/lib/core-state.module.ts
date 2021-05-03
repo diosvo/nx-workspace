@@ -1,24 +1,14 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Route } from '@angular/router';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import * as fromWidgets from './widgets/widgets.reducer';
-import { WidgetsEffects } from './widgets/widgets.effects';
-import { WidgetsFacade } from './widgets/widgets.facade';
+import { NgModule } from '@angular/core';
 
-export const coreStateRoutes: Route[] = [];
+import { CoreDataModule } from '@fem-production/core-data';
+import { WidgetsFacade } from './widgets/widgets.facade';
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule,
-    StoreModule.forFeature(
-      fromWidgets.WIDGETS_FEATURE_KEY,
-      fromWidgets.reducer
-    ),
-    EffectsModule.forFeature([WidgetsEffects]),
+    CoreDataModule
   ],
   providers: [WidgetsFacade],
 })
-export class CoreStateModule {}
+export class CoreStateModule { }

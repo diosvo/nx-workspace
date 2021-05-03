@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Widget } from '@fem-production/api-interfaces';
-import { WidgetsService } from '@fem-production/core-data';
-import { Observable, Subject } from 'rxjs';
+import { WidgetsFacade } from '@fem-production/core-state';
+import { Observable } from 'rxjs';
 
 const emptyWidget: Widget = {
   id: null,
@@ -15,34 +15,30 @@ const emptyWidget: Widget = {
   styleUrls: ['./widgets.component.scss']
 })
 export class WidgetsComponent implements OnInit {
-  allWidgets = new Subject<Widget[]>();
-  selectedWidget = new Subject<Widget>();
-  mutations = new Subject();
+  widgets$: Observable<Widget[]> = this.widgetsFacade.allWidgets$;
+  selectedWidget$: Observable<Widget> = this.widgetsFacade.selectedWidget$;
 
-  allWidgets$ = this.allWidgets.asObservable();
-  selectedWidget$ = this.selectedWidget.asObservable();
-  mutations$ = this.mutations.asObservable();
-
-  constructor(private widgetsService: WidgetsService) { }
+  constructor(private widgetsFacade: WidgetsFacade) { }
 
   ngOnInit(): void {
-    this.load();
     this.reset();
   }
 
   reset(): void {
     this.load();
-    this.mutations.next(true);
+    this.select(null);
+  }
+
+  resetForm(): void {
+    this.select(emptyWidget);
   }
 
   select(widget: Widget): void {
-    this.selectedWidget.next(widget);
+    this.widgetsFacade.selectWidget(widget);
   }
 
   load(): void {
-    this.widgetsService
-      .all()
-      .subscribe((widgets: Widget[]) => this.allWidgets.next(widgets));
+    this.widgetsFacade.loadWidgets();
   }
 
   save(widget: Widget): void {
@@ -50,14 +46,14 @@ export class WidgetsComponent implements OnInit {
   }
 
   create(widget: Widget): void {
-    this.widgetsService.create(widget).subscribe((_) => this.reset());
+    // this.widgetsService.create(widget).subscribe((_) => this.reset());
   }
 
   update(widget: Widget): void {
-    this.widgetsService.update(widget).subscribe((_) => this.reset());
+    // this.widgetsService.update(widget).subscribe((_) => this.reset());
   }
 
   delete(widget: Widget): void {
-    this.widgetsService.delete(widget).subscribe((_) => this.reset());
+    // this.widgetsService.delete(widget).subscribe((_) => this.reset());
   }
 }
