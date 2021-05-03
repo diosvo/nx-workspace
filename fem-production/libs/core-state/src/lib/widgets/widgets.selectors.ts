@@ -1,45 +1,55 @@
+import { Widget } from '@fem-production/api-interfaces';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {
   WIDGETS_FEATURE_KEY,
-  State,
   WidgetsPartialState,
   widgetsAdapter,
+  WidgetsState,
 } from './widgets.reducer';
 
 // Lookup the 'Widgets' feature state managed by NgRx
 export const getWidgetsState = createFeatureSelector<
   WidgetsPartialState,
-  State
+  WidgetsState
 >(WIDGETS_FEATURE_KEY);
 
 const { selectAll, selectEntities } = widgetsAdapter.getSelectors();
 
 export const getWidgetsLoaded = createSelector(
   getWidgetsState,
-  (state: State) => state.loaded
+  (state: WidgetsState) => state.loaded
 );
 
 export const getWidgetsError = createSelector(
   getWidgetsState,
-  (state: State) => state.error
+  (state: WidgetsState) => state.error
 );
 
-export const getAllWidgets = createSelector(getWidgetsState, (state: State) =>
-  selectAll(state)
+export const getAllWidgets = createSelector(
+  getWidgetsState,
+  (state: WidgetsState) => selectAll(state)
 );
 
 export const getWidgetsEntities = createSelector(
   getWidgetsState,
-  (state: State) => selectEntities(state)
+  (state: WidgetsState) => selectEntities(state)
 );
 
-export const getSelectedId = createSelector(
+export const getSelectedWidgetId = createSelector(
   getWidgetsState,
-  (state: State) => state.selectedId
+  (state: WidgetsState) => state.selectedId
 );
 
-export const getSelected = createSelector(
+const emptyWidget: Widget = {
+  id: null,
+  title: '',
+  description: '',
+};
+
+export const getSelectedWidget = createSelector(
   getWidgetsEntities,
-  getSelectedId,
-  (entities, selectedId) => selectedId && entities[selectedId]
+  getSelectedWidgetId,
+  (entities, selectedId) => {
+    return selectedId ? entities[selectedId] : emptyWidget;
+  }
 );
