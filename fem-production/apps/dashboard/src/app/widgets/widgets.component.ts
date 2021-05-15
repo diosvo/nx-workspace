@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Widget } from '@fem-production/api-interfaces';
-import { WidgetsFacade } from '@fem-production/core-state';
-import { Observable } from 'rxjs';
+import { WidgetsService } from '@fem-production/core-data';
 
 const emptyWidget: Widget = {
   id: null,
@@ -15,10 +14,10 @@ const emptyWidget: Widget = {
   styleUrls: ['./widgets.component.scss']
 })
 export class WidgetsComponent implements OnInit {
-  widgets$: Observable<Widget[]> = this.widgetsFacade.allWidgets$;
-  selectedWidget$: Observable<Widget> = this.widgetsFacade.selectedWidget$;
+  widgets: Array<Widget>;
+  selectedWidget: Widget;
 
-  constructor(private widgetsFacade: WidgetsFacade) { }
+  constructor(private widgetsService: WidgetsService) { }
 
   ngOnInit(): void {
     this.reset();
@@ -34,11 +33,15 @@ export class WidgetsComponent implements OnInit {
   }
 
   select(widget: Widget): void {
-    this.widgetsFacade.selectWidget(widget);
+    this.selectedWidget = widget;
   }
 
   load(): void {
-    this.widgetsFacade.loadWidgets();
+    this.widgetsService
+      .all()
+      .subscribe({
+        next: (response: Array<Widget>) => this.widgets = response
+      })
   }
 
   save(widget: Widget): void {
@@ -46,14 +49,14 @@ export class WidgetsComponent implements OnInit {
   }
 
   create(widget: Widget): void {
-    // this.widgetsService.create(widget).subscribe((_) => this.reset());
+    this.widgetsService.create(widget).subscribe((_) => this.reset());
   }
 
   update(widget: Widget): void {
-    // this.widgetsService.update(widget).subscribe((_) => this.reset());
+    this.widgetsService.update(widget).subscribe((_) => this.reset());
   }
 
   delete(widget: Widget): void {
-    // this.widgetsService.delete(widget).subscribe((_) => this.reset());
+    this.widgetsService.delete(widget).subscribe((_) => this.reset());
   }
 }

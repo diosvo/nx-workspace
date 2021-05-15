@@ -10,8 +10,8 @@ import { filter } from 'rxjs/operators';
 @Injectable()
 export class WidgetsFacade {
   loaded$ = this.store.pipe(select(WidgetsSelectors.getWidgetsLoaded));
-  allWidget$ = this.store.pipe(select(WidgetsSelectors.getAllWidgets));
-  selectedWidgets$ = this.store.pipe(select(WidgetsSelectors.getSelectedWidget));
+  allWidgets$ = this.store.pipe(select(WidgetsSelectors.getAllWidgets));
+  selectedWidget$ = this.store.pipe(select(WidgetsSelectors.getSelectedWidget));
 
   mutations$ = this.actions$.pipe(
     filter((action: Action) =>
