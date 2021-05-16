@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Widget } from '@fem-production/api-interfaces';
 
 @Component({
@@ -8,16 +7,13 @@ import { Widget } from '@fem-production/api-interfaces';
   styleUrls: ['./widget-details.component.scss']
 })
 export class WidgetDetailsComponent {
-  @Input() widget: Widget;
+  currentWidget: Widget;
+  originalTitle = '';
+
   @Output() saved = new EventEmitter();
   @Output() cancelled = new EventEmitter();
-
-  createForm: FormGroup;
-
-  constructor(private fb: FormBuilder) {
-    this.createForm = this.fb.group({
-      title: ['', Validators.required],
-      description: ['', Validators.required]
-    })
-  }
+  @Input() set widget(value: Widget) {
+    if (value) this.originalTitle = value.title;
+    this.currentWidget = { ...value };
+  };
 }

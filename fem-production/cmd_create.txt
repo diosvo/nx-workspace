@@ -37,3 +37,9 @@ yarn add @nestjs/swagger swagger-ui-express
 
 > Facade
 nx g @nrwl/angular:ngrx widgets --module=libs/core-state/src/lib/core-state.module.ts --directory widgets --defaults --facade
+
+> Build
+yarn add webpack-bundle-analyzer --save-dev
+-- project graph: nx dep-graph --file=output.html
+nx run dashboard:build --prod
+nx run dashboard:build:production

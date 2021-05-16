@@ -1,32 +1,57 @@
 import { Injectable } from '@angular/core';
 
 import { Widget } from '@fem-production/api-interfaces';
-import { WidgetsService } from '@fem-production/core-data';
+import * as WidgetsSelectors from './widgets.selectors';
+import * as WidgetsActions from './widgets.actions';
+import { Action, ActionsSubject, select, Store } from '@ngrx/store';
 
-import { Subject, throwError } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 @Injectable()
 export class WidgetsFacade {
-  private allWidgets = new Subject<Widget[]>();
-  private selectedWidget = new Subject<Widget>();
-  private mutations = new Subject();
+  loaded$ = this.store.pipe(select(WidgetsSelectors.getWidgetsLoaded));
+  allWidgets$ = this.store.pipe(select(WidgetsSelectors.getAllWidgets));
+  selectedWidget$ = this.store.pipe(select(WidgetsSelectors.getSelectedWidget));
 
-  allWidgets$ = this.allWidgets.asObservable();
-  selectedWidget$ = this.selectedWidget.asObservable();
-  mutations$ = this.mutations.asObservable();
+  mutations$ = this.actions$.pipe(
+    filter((action: Action) =>
+      action.type === WidgetsActions.createWidget({} as any).type ||
+      action.type === WidgetsActions.updateWidget({} as any).type ||
+      action.type === WidgetsActions.deleteWidget({} as any).type
+    )
+  )
 
-  constructor(private widgetsService: WidgetsService) { }
+  constructor(private store: Store, private actions$: ActionsSubject) { }
 
-  selectWidget(widget: Widget) {
-    this.selectedWidget.next(widget);
+  selectWidget(selectedId: string) {
+    this.dispatch(WidgetsActions.selectWidget({ selectedId }));
   }
 
   loadWidgets() {
-    this.widgetsService
-      .all()
-      .subscribe({
-        next: (widgets: Widget[]) => this.allWidgets.next(widgets),
-        error: () => throwError('An error occurred')
-      })
+    this.dispatch(WidgetsActions.loadWidgets());
+  }
+
+  loadWidget(widgetId: string) {
+    this.dispatch(WidgetsActions.loadWidget({ widgetId }));
+  }
+
+  saveWidget(widget: Widget) {
+    widget.id ? this.updateWidget(widget) : this.createWidget(widget);
+  }
+
+  createWidget(widget: Widget) {
+    this.dispatch(WidgetsActions.createWidget({ widget }));
+  }
+
+  updateWidget(widget: Widget) {
+    this.dispatch(WidgetsActions.updateWidget({ widget }));
+  }
+
+  deleteWidget(widget: Widget) {
+    this.dispatch(WidgetsActions.deleteWidget({ widget }));
+  }
+
+  dispatch(action: Action) {
+    this.store.dispatch(action);
   }
 }

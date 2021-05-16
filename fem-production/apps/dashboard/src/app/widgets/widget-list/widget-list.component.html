@@ -1,22 +1,18 @@
 <mat-card>
-  <h3>Widget List</h3>
-  <table mat-table [dataSource]="widgets">
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> No. </th>
-      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="title">
-      <th mat-header-cell *matHeaderCellDef> Title </th>
-      <td mat-cell *matCellDef="let element"> {{element.title}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="description">
-      <th mat-header-cell *matHeaderCellDef> Description </th>
-      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+  <mat-card-title>
+    Widgets
+  </mat-card-title>
+  
+  <mat-card-content>
+    <mat-list data-cy="widgets-list">
+      <mat-list-item *ngFor="let widget of widgets" attr.data-cy="widget-{{ widget.id }}-item" class="mat-list-option"
+        (click)="selected.emit(widget)" [matTooltip]="widget.description">
+        <span matLine attr.data-cy="widget-{{ widget.id }}-item-title">{{ widget.title }}</span>
+        <button *ngIf="!readonly" attr.data-cy="delete-widget-{{ widget.id }}-btn" mat-icon-button type="button"
+          color="warn" (click)="deleted.emit(widget); $event.stopImmediatePropagation()">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
 </mat-card>

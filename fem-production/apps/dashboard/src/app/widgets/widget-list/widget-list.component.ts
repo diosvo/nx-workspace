@@ -11,6 +11,4 @@ export class WidgetListComponent {
   @Input() readonly = false;
   @Output() selected = new EventEmitter();
   @Output() deleted = new EventEmitter();
-
-  displayedColumns = ['id', 'title', 'description'];
 }
